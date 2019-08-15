@@ -69,6 +69,15 @@ if(args === 'concert-this') {
             console.log("Actors: " + movieResponse.data.Actors);
             
         })
-    }
+    } else if (args === 'do-what-it-says') {
+        fs.readFile("random.txt", "utf8", function(error, data) {
+            if(error) {
+                console.log(error);
+            }
+            console.log(data);
+            });
+        }
     
 
+    
+    
