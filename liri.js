@@ -41,7 +41,7 @@ if(args === 'concert-this') {
          //Finding out spotify song info
     } else if (args === 'spotify-this-song') {
         var song = process.argv.slice(3).join(" ");
-        console.log(song);
+        // console.log(song);
         spotify.search({
             type: 'track',
             query: song
@@ -53,11 +53,24 @@ if(args === 'concert-this') {
             console.log("Song Name: " + data.tracks.items[0].name);
             console.log("URL: " + data.tracks.items[0].href);
             console.log("Album: " + data.tracks.items[0].album.name);
-
-
+        })
+    } else if (args === 'movie-this') {
+        var movie = process.argv.slice(3).join(" ");
+        var request = ("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy");
+        console.log(request);
+        axios.get(request).then(function(movieResponse){
+            // console.log(movieResponse)
+            console.log("Title: " + movieResponse.data.Title);
+            console.log("Year: " + movieResponse.data.Year);
+            console.log("IMDB Rating: " + movieResponse.data.imdbRating);
+            console.log("Language: " + movieResponse.data.Language);
+            console.log("Plot: " + movieResponse.data.Plot);
+            console.log("Actors: " + movieResponse.data.Actors);
+            
         })
     }
-
+    
+ 
 
 // axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
 //   function(response) {
