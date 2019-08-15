@@ -7,62 +7,56 @@ var request = require('request');
 //Require moment
 var moment = require('moment');
 
-
 //Require file systems
 var fs = require('fs');
-
 
 //Require axios
 var axios = require("axios");
 
-
 //Link keys
 var keys = require('./keys.js');
-
 
 //Initialize spotify
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
-//Omdb and Bands In Town
-// var obdbKey = keys.omdb;
-// var bandsInTown = keys.bandsInTown
+var args = process.argv[2];
 
-var arg1 = process.argv[2];
-var arg2 = process.argv.slice(3).join(" ");
-// console.log(arg1);
-// console.log(arg2);
-
+// console.log(args);
 
 //Finding out info on a concert
-// if(args === 'concert-this') {
+if(args === 'concert-this') {
+    var artist = process.argv.slice(3).join(" ");
+    console.log(artist);
     
-//     console.log(artist);
-    
-//     var request = ("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp");
-//         console.log(request);
+    var request = ("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp");
+        console.log(request);
 
-//         axios.get(request).then(function(artistResponse){
-            // console.log("Venue: " + artistResponse.data[0].venue.name);
-            // console.log("City " + artistResponse.data[0].venue.city);
-            // console.log("Event Date " + moment(artistResponse.data[0].datetime).format("MM/DD/YYYY"));
-    //     })
-       
-        
-    // }
-    
+        // axios.get(request).then(function(artistResponse){
+        //     console.log("Venue: " + artistResponse.data[0].venue.name);
+        //     console.log("City " + artistResponse.data[0].venue.city);
+        //     console.log("Event Date " + moment(artistResponse.data[0].datetime).format("MM/DD/YYYY"));
+        // })
+
+         //Finding out spotify song info
+    } else if (args === 'spotify-this-song') {
+        var song = process.argv.slice(3).join(" ");
+        console.log(song);
+        spotify.search({
+            type: 'track',
+            query: song
+        }, function(error,data) {
+            if(error) {
+                console.log("There was a problem: " + error);
+            }
+            console.log("Artist Name: " + data.tracks.items[0].artists.name);
+            console.log("Song Name: " + data.tracks.items[0].name);
+            console.log("URL: " + data.tracks.items[0].href);
+            console.log("Album: " + data.tracks.items[0].album.name);
 
 
-
-
-
-
-
-
-
-
-
-
+        })
+    }
 
 
 // axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
@@ -89,3 +83,5 @@ var arg2 = process.argv.slice(3).join(" ");
 //     }
 //     console.log(error.config);
 //   });
+
+
