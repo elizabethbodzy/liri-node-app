@@ -74,7 +74,10 @@ if(args === 'concert-this') {
             if(error) {
                 console.log(error);
             }
-            console.log(data);
+            // console.log(data);
+            var array = data.split(",");
+            console.log(array[1]);
+
             });
         }
     
