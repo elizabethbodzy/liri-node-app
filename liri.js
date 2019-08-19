@@ -50,7 +50,8 @@ if(args === 'concert-this') {
             if(error) {
                 console.log("There was a problem: " + error);
             }
-            console.log("Artist Name: " + data.tracks.items[0].artists.name);
+           
+            console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
             console.log("Song Name: " + data.tracks.items[0].name);
             console.log("URL: " + data.tracks.items[0].href);
             console.log("Album: " + data.tracks.items[0].album.name);
